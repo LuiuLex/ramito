@@ -12,33 +12,43 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: sans-serif;
 }
 
+/* CONTENEDOR */
 .bouquet {
   position: relative;
-  width: 300px;
-  height: 400px;
+  width: 350px;
+  height: 450px;
 }
 
-/* Tallos */
+/* TALLOS */
 .stem {
   position: absolute;
   width: 6px;
-  height: 150px;
-  background: green;
+  height: 180px;
+  background: #2e7d32;
   bottom: 0;
   left: 50%;
   transform-origin: bottom;
 }
 
-/* Flor */
+/* HOJAS */
+.leaf {
+  position: absolute;
+  width: 50px;
+  height: 25px;
+  background: #43a047;
+  border-radius: 50px;
+}
+
+.l1 { bottom: 120px; left: 130px; transform: rotate(-30deg); }
+.l2 { bottom: 140px; left: 170px; transform: rotate(30deg); }
+
+/* FLOR BASE */
 .flower {
   position: absolute;
-  width: 60px;
-  height: 60px;
-  background: pink;
-  border-radius: 50%;
+  width: 70px;
+  height: 70px;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -47,23 +57,44 @@ body {
   transform: scale(1.2);
 }
 
-/* posiciones */
-.f1 { top: 40px; left: 120px; background:#ff4d6d; }
-.f2 { top: 80px; left: 60px; background:#ffb703; }
-.f3 { top: 80px; left: 180px; background:#8338ec; }
-.f4 { top: 140px; left: 100px; background:#219ebc; }
-
-/* hoja */
-.leaf {
+/* PETALOS */
+.petal {
   position: absolute;
-  width: 40px;
-  height: 20px;
-  background: green;
-  border-radius: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
 
-.l1 { bottom: 100px; left: 110px; transform: rotate(-30deg); }
-.l2 { bottom: 120px; left: 140px; transform: rotate(30deg); }
+.center {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #ffeb3b;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* POSICION PETALOS */
+.p1 { top: 0; left: 20px; }
+.p2 { top: 20px; left: 0; }
+.p3 { top: 20px; right: 0; }
+.p4 { bottom: 0; left: 20px; }
+
+/* COLORES DE FLORES */
+.red .petal { background: #ff4d6d; }
+.yellow .petal { background: #ffb703; }
+.purple .petal { background: #8338ec; }
+.blue .petal { background: #219ebc; }
+.pink .petal { background: #ff80ab; }
+
+/* POSICIONES */
+.f1 { top: 40px; left: 140px; }
+.f2 { top: 90px; left: 60px; }
+.f3 { top: 90px; right: 60px; }
+.f4 { top: 160px; left: 100px; }
+.f5 { top: 160px; right: 100px; }
 
 </style>
 </head>
@@ -71,30 +102,66 @@ body {
 
 <div class="bouquet">
 
-  <!-- flores con links -->
+  <!-- FLORES (cada una es un link) -->
+
   <a href="https://open.spotify.com" target="_blank">
-    <div class="flower f1"></div>
+    <div class="flower red f1">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="center"></div>
+    </div>
   </a>
 
   <a href="https://youtube.com" target="_blank">
-    <div class="flower f2"></div>
+    <div class="flower yellow f2">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="center"></div>
+    </div>
   </a>
 
   <a href="https://drive.google.com" target="_blank">
-    <div class="flower f3"></div>
+    <div class="flower purple f3">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="center"></div>
+    </div>
   </a>
 
   <a href="https://instagram.com" target="_blank">
-    <div class="flower f4"></div>
+    <div class="flower blue f4">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="center"></div>
+    </div>
   </a>
 
-  <!-- tallos -->
+  <a href="https://example.com" target="_blank">
+    <div class="flower pink f5">
+      <div class="petal p1"></div>
+      <div class="petal p2"></div>
+      <div class="petal p3"></div>
+      <div class="petal p4"></div>
+      <div class="center"></div>
+    </div>
+  </a>
+
+  <!-- TALLOS -->
   <div class="stem" style="transform: rotate(-10deg);"></div>
   <div class="stem" style="transform: rotate(10deg);"></div>
   <div class="stem" style="transform: rotate(-25deg);"></div>
   <div class="stem" style="transform: rotate(25deg);"></div>
+  <div class="stem" style="transform: rotate(0deg);"></div>
 
-  <!-- hojas -->
+  <!-- HOJAS -->
   <div class="leaf l1"></div>
   <div class="leaf l2"></div>
 
