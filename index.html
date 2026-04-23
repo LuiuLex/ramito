@@ -7,7 +7,7 @@
 <style>
 body {
   margin: 0;
-  background: linear-gradient(#ffe6eb, #fff);
+  background: #f3e5e5;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,84 +17,34 @@ body {
 /* CONTENEDOR */
 .bouquet {
   position: relative;
-  width: 350px;
-  height: 450px;
+  width: 400px;
 }
 
-/* TALLOS */
-.stem {
-  position: absolute;
-  width: 6px;
-  height: 180px;
-  background: #2e7d32;
-  bottom: 0;
-  left: 50%;
-  transform-origin: bottom;
+/* IMAGEN DEL RAMO */
+.bouquet img {
+  width: 100%;
+  border-radius: 10px;
 }
 
-/* HOJAS */
-.leaf {
+/* ZONAS CLICK (flores invisibles) */
+.link {
   position: absolute;
-  width: 50px;
-  height: 25px;
-  background: #43a047;
-  border-radius: 50px;
-}
-
-.l1 { bottom: 120px; left: 130px; transform: rotate(-30deg); }
-.l2 { bottom: 140px; left: 170px; transform: rotate(30deg); }
-
-/* FLOR BASE */
-.flower {
-  position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.flower:hover {
-  transform: scale(1.2);
-}
-
-/* PETALOS */
-.petal {
-  position: absolute;
-  width: 30px;
-  height: 30px;
   border-radius: 50%;
 }
 
-.center {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  background: #ffeb3b;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* POSICIONES (ajústalas si quieres) */
+.l1 { top: 60px; left: 120px; }
+.l2 { top: 80px; right: 100px; }
+.l3 { top: 120px; left: 60px; }
+.l4 { top: 140px; right: 60px; }
+.l5 { top: 100px; left: 180px; }
+
+.link:hover {
+  background: rgba(255, 0, 100, 0.2);
 }
-
-/* POSICION PETALOS */
-.p1 { top: 0; left: 20px; }
-.p2 { top: 20px; left: 0; }
-.p3 { top: 20px; right: 0; }
-.p4 { bottom: 0; left: 20px; }
-
-/* COLORES DE FLORES */
-.red .petal { background: #ff4d6d; }
-.yellow .petal { background: #ffb703; }
-.purple .petal { background: #8338ec; }
-.blue .petal { background: #219ebc; }
-.pink .petal { background: #ff80ab; }
-
-/* POSICIONES */
-.f1 { top: 40px; left: 140px; }
-.f2 { top: 90px; left: 60px; }
-.f3 { top: 90px; right: 60px; }
-.f4 { top: 160px; left: 100px; }
-.f5 { top: 160px; right: 100px; }
 
 </style>
 </head>
@@ -102,68 +52,15 @@ body {
 
 <div class="bouquet">
 
-  <!-- FLORES (cada una es un link) -->
+  <!-- IMAGEN DEL RAMO -->
+  <img src="https://i.imgur.com/0Z8FQyR.jpg" alt="ramo de rosas">
 
-  <a href="https://open.spotify.com" target="_blank">
-    <div class="flower red f1">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="center"></div>
-    </div>
-  </a>
-
-  <a href="https://youtube.com" target="_blank">
-    <div class="flower yellow f2">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="center"></div>
-    </div>
-  </a>
-
-  <a href="https://drive.google.com" target="_blank">
-    <div class="flower purple f3">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="center"></div>
-    </div>
-  </a>
-
-  <a href="https://instagram.com" target="_blank">
-    <div class="flower blue f4">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="center"></div>
-    </div>
-  </a>
-
-  <a href="https://example.com" target="_blank">
-    <div class="flower pink f5">
-      <div class="petal p1"></div>
-      <div class="petal p2"></div>
-      <div class="petal p3"></div>
-      <div class="petal p4"></div>
-      <div class="center"></div>
-    </div>
-  </a>
-
-  <!-- TALLOS -->
-  <div class="stem" style="transform: rotate(-10deg);"></div>
-  <div class="stem" style="transform: rotate(10deg);"></div>
-  <div class="stem" style="transform: rotate(-25deg);"></div>
-  <div class="stem" style="transform: rotate(25deg);"></div>
-  <div class="stem" style="transform: rotate(0deg);"></div>
-
-  <!-- HOJAS -->
-  <div class="leaf l1"></div>
-  <div class="leaf l2"></div>
+  <!-- LINKS SOBRE LAS ROSAS -->
+  <a href="https://open.spotify.com" class="link l1" target="_blank"></a>
+  <a href="https://youtube.com" class="link l2" target="_blank"></a>
+  <a href="https://drive.google.com" class="link l3" target="_blank"></a>
+  <a href="https://instagram.com" class="link l4" target="_blank"></a>
+  <a href="https://example.com" class="link l5" target="_blank"></a>
 
 </div>
 
