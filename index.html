@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Un ramo de links</title>
+
+  <!-- Fuente bonita -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      background: #f5f5f5;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    h1 span {
+      color: #007bff;
+      text-decoration: underline;
+    }
+
+    .bouquet {
+      margin: 30px auto;
+      width: 300px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .text {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #555;
+    }
+
+    .colors {
+      margin-top: 15px;
+    }
+
+    .color {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      margin: 5px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e63950;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>un ramo de <span>links</span></h1>
+
+    <!-- Imagen del ramo -->
+    <img class="bouquet" src="https://i.imgur.com/3ZQ3Z4S.png" alt="ramo">
+
+    <div class="text">
+      este es el ramo más original 💐
+    </div>
+
+    <!-- colores -->
+    <div class="colors">
+      <div class="color" style="background:#ff4d6d;"></div>
+      <div class="color" style="background:#ffb703;"></div>
+      <div class="color" style="background:#219ebc;"></div>
+      <div class="color" style="background:#8338ec;"></div>
+    </div>
+
+    <button class="btn">Save & Share</button>
+  </div>
+
+</body>
+</html>
