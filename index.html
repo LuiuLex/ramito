@@ -12,7 +12,7 @@ body{
   font-family:Arial;
 }
 
-/* BOTÓN */
+/* BOTÓN GIRASOL */
 #sunflower{
   position:absolute;
   top:50%;
@@ -20,7 +20,7 @@ body{
   transform:translate(-50%,-50%);
   width:120px;
   cursor:pointer;
-  transition:0.5s;
+  z-index:10; /* 👈 importante */
 }
 
 /* CANVAS */
@@ -28,6 +28,7 @@ canvas{
   position:absolute;
   top:0;
   left:0;
+  pointer-events:none; /* 👈 CLAVE: deja pasar el click */
 }
 
 /* TEXTO */
@@ -36,23 +37,18 @@ canvas{
   left:10%;
   opacity:0;
   transition:2s;
+  z-index:5;
 }
 
-#text{
-  top:40%;
-  font-size:28px;
-}
-
-#clock{
-  top:50%;
-  font-size:22px;
-}
+#text{ top:40%; font-size:28px; }
+#clock{ top:50%; font-size:22px; }
 </style>
 </head>
 
 <body>
 
-<img id="sunflower" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png">
+<img id="sunflower"
+src="https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png">
 
 <canvas id="c"></canvas>
 
@@ -66,19 +62,16 @@ const ctx = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let branches = [];
-let flowers = [];
 let started = false;
 
-/* CLICK */
-document.getElementById("sunflower").onclick = () => {
+/* CLICK (AHORA SÍ FUNCIONA) */
+document.getElementById("sunflower").addEventListener("click", () => {
   if(started) return;
   started = true;
 
   document.getElementById("sunflower").style.opacity = 0;
-
   dropSeed();
-};
+});
 
 /* SEMILLA */
 function dropSeed(){
@@ -103,6 +96,8 @@ function dropSeed(){
 }
 
 /* ÁRBOL */
+let branches = [];
+
 function growTree(){
   branches.push({
     x:innerWidth/2,
@@ -150,7 +145,6 @@ function growTree(){
 /* CORAZÓN */
 function growHeart(){
   let t = 0;
-
   let img = new Image();
   img.src = "https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png";
 
@@ -189,7 +183,7 @@ function moveScene(){
   },16);
 }
 
-/* TEXTO */
+/* TEXTO + RELOJ */
 function showText(){
   document.getElementById("text").style.opacity = 1;
   document.getElementById("clock").style.opacity = 1;
