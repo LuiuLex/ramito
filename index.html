@@ -7,31 +7,29 @@
 <style>
 body {
   margin: 0;
-  background: #f3e5e5;
+  background: #000; /* negro para que combine con tu imagen */
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-/* CONTENEDOR DEL RAMO */
+/* CONTENEDOR */
 .bouquet {
   position: relative;
-  width: 420px;
+  width: 450px;
 }
 
 /* IMAGEN */
 .bouquet img {
   width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* LINKS (zonas invisibles) */
+/* LINKS (zonas de flores) */
 .link {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s;
@@ -39,17 +37,17 @@ body {
 
 /* efecto hover */
 .link:hover {
-  background: rgba(255, 0, 100, 0.25);
+  background: rgba(255, 0, 100, 0.3);
   transform: scale(1.1);
 }
 
-/* POSICIONES (ajústalas si hace falta) */
-.l1 { top: 60px; left: 140px; }
-.l2 { top: 80px; right: 120px; }
-.l3 { top: 120px; left: 70px; }
-.l4 { top: 140px; right: 70px; }
-.l5 { top: 110px; left: 200px; }
-.l6 { top: 160px; left: 150px; }
+/* POSICIONES (ajustadas a tu imagen) */
+.l1 { top: 40px; left: 160px; }   /* flor blanca arriba */
+.l2 { top: 80px; left: 80px; }    /* flor roja */
+.l3 { top: 80px; right: 80px; }   /* flor amarilla */
+.l4 { top: 140px; left: 140px; }  /* flor rosada centro */
+.l5 { top: 160px; right: 120px; } /* flor rosada pequeña */
+.l6 { top: 180px; left: 100px; }  /* flor blanca abajo */
 
 </style>
 </head>
@@ -58,9 +56,9 @@ body {
 <div class="bouquet">
 
   <!-- TU IMAGEN -->
-  <img src="ramo.jpeg" alt="ramo de rosas">
+  <img src="ramo.png" alt="ramo">
 
-  <!-- LINKS SOBRE LAS FLORES -->
+  <!-- LINKS -->
   <a href="https://open.spotify.com" target="_blank" class="link l1"></a>
   <a href="https://youtube.com" target="_blank" class="link l2"></a>
   <a href="https://drive.google.com" target="_blank" class="link l3"></a>
