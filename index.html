@@ -2,95 +2,165 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ramo de Links 💐</title>
-
+<title>🌻 Para ti</title>
 <style>
 body {
   margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* fondo rosado pastel */
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%),
-    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2) 0%, transparent 40%),
-    linear-gradient(#f8d7da, #f3c6cc);
+  overflow: hidden;
+  background: #e6d8c9;
+  font-family: Arial, sans-serif;
 }
 
-/* CONTENEDOR */
-.bouquet {
-  position: relative;
-  width: 600px; /* MÁS GRANDE */
-}
-
-/* IMAGEN RAMO */
-.bouquet img.main {
-  width: 100%;
-  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25));
-}
-
-/* IMÁGENES SOBRE FLORES */
-.flower-img {
+/* Girasol inicial */
+#sunflower {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
   cursor: pointer;
-  transition: 0.3s;
-  border: 3px solid white;
+  transition: opacity 1s;
 }
 
-.flower-img:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
+/* Semilla */
+.seed {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: brown;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  animation: fall 1s forwards;
 }
 
-/* POSICIONES */
-.f1 { top: 60px; left: 200px; }
-.f2 { top: 120px; left: 100px; }
-.f3 { top: 120px; right: 100px; }
-.f4 { top: 200px; left: 220px; }
-.f5 { top: 230px; right: 180px; }
-.f6 { top: 260px; left: 150px; }
+@keyframes fall {
+  to {
+    top: 80%;
+  }
+}
 
+/* Árbol */
+#tree {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 0;
+  background: green;
+  transition: height 2s;
+}
+
+/* Corazón de girasoles */
+.flower {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url('https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png') no-repeat center/contain;
+}
+
+/* Texto */
+#text {
+  position: absolute;
+  left: 10%;
+  top: 40%;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+/* Reloj */
+#clock {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 2s;
+}
 </style>
 </head>
+
 <body>
 
-<div class="bouquet">
+<img id="sunflower" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png">
 
-  <!-- RAMO -->
-  <img src="ramo.png" class="main">
+<div id="tree"></div>
+<div id="text">Para ti 💛</div>
+<div id="clock"></div>
 
-  <!-- IMÁGENES CLICKEABLES -->
-  <a href="https://open.spotify.com" target="_blank">
-    <img src="https://picsum.photos/100?1" class="flower-img f1">
-  </a>
+<script>
+const sunflower = document.getElementById("sunflower");
+const tree = document.getElementById("tree");
+const text = document.getElementById("text");
+const clock = document.getElementById("clock");
 
-  <a href="https://youtube.com" target="_blank">
-    <img src="https://picsum.photos/100?2" class="flower-img f2">
-  </a>
+sunflower.onclick = () => {
 
-  <a href="https://drive.google.com" target="_blank">
-    <img src="https://picsum.photos/100?3" class="flower-img f3">
-  </a>
+  // Ocultar girasol
+  sunflower.style.opacity = "0";
 
-  <a href="https://instagram.com" target="_blank">
-    <img src="https://picsum.photos/100?4" class="flower-img f4">
-  </a>
+  // Crear semilla
+  let seed = document.createElement("div");
+  seed.className = "seed";
+  document.body.appendChild(seed);
 
-  <a href="https://example.com" target="_blank">
-    <img src="https://picsum.photos/100?5" class="flower-img f5">
-  </a>
+  setTimeout(() => {
+    seed.remove();
 
-  <a href="https://example.com" target="_blank">
-    <img src="https://picsum.photos/100?6" class="flower-img f6">
-  </a>
+    // Crecer árbol
+    tree.style.height = "300px";
 
-</div>
+    setTimeout(() => {
+      createHeart();
+
+      setTimeout(() => {
+        // mover árbol a la derecha
+        tree.style.left = "70%";
+
+        // mostrar texto
+        text.style.opacity = "1";
+        clock.style.opacity = "1";
+
+        startClock();
+
+      }, 2000);
+
+    }, 2000);
+
+  }, 1000);
+};
+
+// Crear corazón con flores
+function createHeart() {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  for (let t = 0; t < Math.PI * 2; t += 0.2) {
+    let x = 16 * Math.pow(Math.sin(t), 3);
+    let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t)
+            - 2 * Math.cos(3*t) - Math.cos(4*t));
+
+    let flower = document.createElement("div");
+    flower.className = "flower";
+
+    flower.style.left = (centerX + x * 10) + "px";
+    flower.style.top = (centerY + y * 10) + "px";
+
+    document.body.appendChild(flower);
+  }
+}
+
+// Reloj
+function startClock() {
+  setInterval(() => {
+    let now = new Date();
+    clock.innerText = now.toLocaleTimeString();
+  }, 1000);
+}
+</script>
 
 </body>
 </html>
