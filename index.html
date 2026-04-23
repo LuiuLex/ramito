@@ -7,47 +7,53 @@
 <style>
 body {
   margin: 0;
-  background: #000; /* negro para que combine con tu imagen */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
+  /* FONDO ROSADO PASTEL CON TEXTURA */
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2) 0%, transparent 40%),
+    linear-gradient(#f8d7da, #f3c6cc);
 }
 
 /* CONTENEDOR */
 .bouquet {
   position: relative;
-  width: 450px;
+  width: 420px;
 }
 
 /* IMAGEN */
 .bouquet img {
   width: 100%;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
 }
 
-/* LINKS (zonas de flores) */
+/* LINKS */
 .link {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s;
 }
 
-/* efecto hover */
+/* HOVER BONITO */
 .link:hover {
-  background: rgba(255, 0, 100, 0.3);
-  transform: scale(1.1);
+  background: rgba(255, 105, 180, 0.25);
+  transform: scale(1.15);
 }
 
-/* POSICIONES (ajustadas a tu imagen) */
-.l1 { top: 40px; left: 160px; }   /* flor blanca arriba */
-.l2 { top: 80px; left: 80px; }    /* flor roja */
-.l3 { top: 80px; right: 80px; }   /* flor amarilla */
-.l4 { top: 140px; left: 140px; }  /* flor rosada centro */
-.l5 { top: 160px; right: 120px; } /* flor rosada pequeña */
-.l6 { top: 180px; left: 100px; }  /* flor blanca abajo */
+/* POSICIONES (ajústalas si quieres) */
+.l1 { top: 40px; left: 140px; }
+.l2 { top: 80px; left: 70px; }
+.l3 { top: 80px; right: 70px; }
+.l4 { top: 130px; left: 140px; }
+.l5 { top: 150px; right: 110px; }
+.l6 { top: 180px; left: 100px; }
 
 </style>
 </head>
@@ -55,10 +61,10 @@ body {
 
 <div class="bouquet">
 
-  <!-- TU IMAGEN -->
+  <!-- TU RAMO -->
   <img src="ramo.png" alt="ramo">
 
-  <!-- LINKS -->
+  <!-- LINKS EN FLORES -->
   <a href="https://open.spotify.com" target="_blank" class="link l1"></a>
   <a href="https://youtube.com" target="_blank" class="link l2"></a>
   <a href="https://drive.google.com" target="_blank" class="link l3"></a>
