@@ -9,145 +9,188 @@ body{
   margin:0;
   background:#e9dfd2;
   overflow:hidden;
+  font-family:Arial;
 }
 
-/* Girasol botón */
-#btn{
+/* BOTÓN GIRASOL */
+#sunflower{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:120px;
+  width:130px;
   cursor:pointer;
   transition:0.5s;
 }
 
-/* canvas animación */
-canvas{
+/* SEMILLA */
+.seed{
   position:absolute;
-  top:0;
-  left:0;
+  width:12px;
+  height:12px;
+  background:#5c3d2e;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  animation:fall 1s forwards;
+}
+
+@keyframes fall{
+  to{
+    top:80%;
+  }
+}
+
+/* ÁRBOL */
+#tree{
+  position:absolute;
+  bottom:0;
+  left:50%;
+  width:6px;
+  height:0;
+  background:#2e7d32;
+  transform:translateX(-50%);
+  transition:height 2s;
+}
+
+/* RAMAS */
+.branch{
+  position:absolute;
+  width:4px;
+  height:80px;
+  background:#2e7d32;
+  transform-origin:bottom;
+}
+
+/* FLORES */
+.flower{
+  position:absolute;
+  width:35px;
+  height:35px;
+  background:url('https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png') center/contain no-repeat;
+}
+
+/* TEXTO */
+#text{
+  position:absolute;
+  left:10%;
+  top:40%;
+  font-size:28px;
+  opacity:0;
+  transition:1.5s;
+}
+
+/* RELOJ */
+#clock{
+  position:absolute;
+  left:10%;
+  top:50%;
+  font-size:22px;
+  opacity:0;
+  transition:1.5s;
 }
 </style>
 </head>
 
 <body>
 
-<img id="btn" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png">
+<img id="sunflower" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png">
 
-<canvas id="c"></canvas>
+<div id="tree"></div>
+<div id="text">Para ti 💛</div>
+<div id="clock"></div>
 
 <script>
-const canvas = document.getElementById("c");
-const ctx = canvas.getContext("2d");
+const sunflower = document.getElementById("sunflower");
+const tree = document.getElementById("tree");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+sunflower.addEventListener("click", startAnimation);
 
-let started = false;
+function startAnimation(){
 
-document.getElementById("btn").onclick = () => {
-  started = true;
-  document.getElementById("btn").style.opacity = 0;
-  growTree();
-};
+  sunflower.style.opacity = "0";
 
-let branches = [];
+  // SEMILLA
+  let seed = document.createElement("div");
+  seed.className = "seed";
+  document.body.appendChild(seed);
 
-function growTree(){
-  let x = canvas.width/2;
-  let y = canvas.height;
+  setTimeout(()=>{
+    seed.remove();
 
-  branches.push({x,y,len:0,angle:-Math.PI/2});
+    // CRECER TRONCO
+    tree.style.height = "250px";
 
-  let interval = setInterval(()=>{
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    setTimeout(()=>{
+      createBranches();
+      createHeart();
 
-    branches.forEach(b=>{
-      let nx = b.x + Math.cos(b.angle)*b.len;
-      let ny = b.y + Math.sin(b.angle)*b.len;
+      setTimeout(()=>{
+        moveTree();
+        showText();
+      },2000);
 
-      ctx.beginPath();
-      ctx.moveTo(b.x,b.y);
-      ctx.lineTo(nx,ny);
-      ctx.strokeStyle="green";
-      ctx.lineWidth=2;
-      ctx.stroke();
+    },2000);
 
-      b.len += 2;
-
-      if(b.len>80 && Math.random()<0.05){
-        branches.push({
-          x:nx,
-          y:ny,
-          len:0,
-          angle:b.angle + (Math.random()*0.8-0.4)
-        });
-      }
-    });
-
-    if(branches.length>80){
-      clearInterval(interval);
-      drawHeart();
-    }
-
-  },30);
+  },1000);
 }
 
-function drawFlower(x,y){
-  let img = new Image();
-  img.src = "https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png";
-  img.onload = ()=>{
-    ctx.drawImage(img,x-15,y-15,30,30);
-  };
+/* RAMAS */
+function createBranches(){
+  for(let i=0;i<5;i++){
+    let branch = document.createElement("div");
+    branch.className = "branch";
+
+    branch.style.bottom = (100 + i*30) + "px";
+    branch.style.left = "50%";
+    branch.style.transform = `rotate(${i%2==0 ? -30 : 30}deg)`;
+
+    document.body.appendChild(branch);
+  }
 }
 
-function drawHeart(){
-  let t = 0;
+/* CORAZÓN */
+function createHeart(){
+  const centerX = window.innerWidth/2;
+  const centerY = window.innerHeight/2;
 
-  let interval = setInterval(()=>{
-    t += 0.2;
-
+  for(let t=0;t<Math.PI*2;t+=0.2){
     let x = 16*Math.pow(Math.sin(t),3);
     let y = -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
 
-    let px = canvas.width/2 + x*10;
-    let py = canvas.height/2 + y*10;
+    let flower = document.createElement("div");
+    flower.className = "flower";
 
-    drawFlower(px,py);
+    flower.style.left = (centerX + x*10) + "px";
+    flower.style.top = (centerY + y*10) + "px";
 
-    if(t >= Math.PI*2){
-      clearInterval(interval);
-      moveTree();
-    }
-
-  },50);
+    document.body.appendChild(flower);
+  }
 }
 
+/* MOVER */
 function moveTree(){
-  let offset = 0;
+  tree.style.left = "70%";
 
-  let interval = setInterval(()=>{
-    offset += 5;
-    canvas.style.transform = `translateX(${offset}px)`;
-
-    if(offset>200){
-      clearInterval(interval);
-      showText();
-    }
-
-  },20);
+  let branches = document.querySelectorAll(".branch");
+  branches.forEach(b=>{
+    b.style.left = "70%";
+  });
 }
 
+/* TEXTO + RELOJ */
 function showText(){
-  let div = document.createElement("div");
-  div.innerHTML = "Para ti 💛";
-  div.style.position="absolute";
-  div.style.left="10%";
-  div.style.top="40%";
-  div.style.fontSize="28px";
+  const text = document.getElementById("text");
+  const clock = document.getElementById("clock");
 
-  document.body.appendChild(div);
+  text.style.opacity = "1";
+  clock.style.opacity = "1";
+
+  setInterval(()=>{
+    let now = new Date();
+    clock.innerText = now.toLocaleTimeString();
+  },1000);
 }
 </script>
 
