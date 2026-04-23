@@ -12,7 +12,7 @@ body {
   justify-content: center;
   align-items: center;
 
-  /* FONDO ROSADO PASTEL CON TEXTURA */
+  /* fondo rosado pastel */
   background: 
     radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 0%, transparent 40%),
     radial-gradient(circle at 80% 80%, rgba(255,255,255,0.2) 0%, transparent 40%),
@@ -22,38 +22,39 @@ body {
 /* CONTENEDOR */
 .bouquet {
   position: relative;
-  width: 420px;
+  width: 600px; /* MÁS GRANDE */
 }
 
-/* IMAGEN */
-.bouquet img {
+/* IMAGEN RAMO */
+.bouquet img.main {
   width: 100%;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.25));
 }
 
-/* LINKS */
-.link {
+/* IMÁGENES SOBRE FLORES */
+.flower-img {
   position: absolute;
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  object-fit: cover;
   cursor: pointer;
   transition: 0.3s;
+  border: 3px solid white;
 }
 
-/* HOVER BONITO */
-.link:hover {
-  background: rgba(255, 105, 180, 0.25);
-  transform: scale(1.15);
+.flower-img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.6);
 }
 
-/* POSICIONES (ajústalas si quieres) */
-.l1 { top: 40px; left: 140px; }
-.l2 { top: 80px; left: 70px; }
-.l3 { top: 80px; right: 70px; }
-.l4 { top: 130px; left: 140px; }
-.l5 { top: 150px; right: 110px; }
-.l6 { top: 180px; left: 100px; }
+/* POSICIONES */
+.f1 { top: 60px; left: 200px; }
+.f2 { top: 120px; left: 100px; }
+.f3 { top: 120px; right: 100px; }
+.f4 { top: 200px; left: 220px; }
+.f5 { top: 230px; right: 180px; }
+.f6 { top: 260px; left: 150px; }
 
 </style>
 </head>
@@ -61,16 +62,33 @@ body {
 
 <div class="bouquet">
 
-  <!-- TU RAMO -->
-  <img src="ramo.png" alt="ramo">
+  <!-- RAMO -->
+  <img src="ramo.png" class="main">
 
-  <!-- LINKS EN FLORES -->
-  <a href="https://open.spotify.com" target="_blank" class="link l1"></a>
-  <a href="https://youtube.com" target="_blank" class="link l2"></a>
-  <a href="https://drive.google.com" target="_blank" class="link l3"></a>
-  <a href="https://instagram.com" target="_blank" class="link l4"></a>
-  <a href="https://example.com" target="_blank" class="link l5"></a>
-  <a href="https://example.com" target="_blank" class="link l6"></a>
+  <!-- IMÁGENES CLICKEABLES -->
+  <a href="https://open.spotify.com" target="_blank">
+    <img src="https://picsum.photos/100?1" class="flower-img f1">
+  </a>
+
+  <a href="https://youtube.com" target="_blank">
+    <img src="https://picsum.photos/100?2" class="flower-img f2">
+  </a>
+
+  <a href="https://drive.google.com" target="_blank">
+    <img src="https://picsum.photos/100?3" class="flower-img f3">
+  </a>
+
+  <a href="https://instagram.com" target="_blank">
+    <img src="https://picsum.photos/100?4" class="flower-img f4">
+  </a>
+
+  <a href="https://example.com" target="_blank">
+    <img src="https://picsum.photos/100?5" class="flower-img f5">
+  </a>
+
+  <a href="https://example.com" target="_blank">
+    <img src="https://picsum.photos/100?6" class="flower-img f6">
+  </a>
 
 </div>
 
