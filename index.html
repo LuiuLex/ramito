@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Ramo de Links</title>
+<title>Ramo de Links 💐</title>
 
 <style>
 body {
@@ -14,37 +14,42 @@ body {
   height: 100vh;
 }
 
-/* CONTENEDOR */
+/* CONTENEDOR DEL RAMO */
 .bouquet {
   position: relative;
-  width: 400px;
+  width: 420px;
 }
 
-/* IMAGEN DEL RAMO */
+/* IMAGEN */
 .bouquet img {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-/* ZONAS CLICK (flores invisibles) */
+/* LINKS (zonas invisibles) */
 .link {
   position: absolute;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* POSICIONES (ajústalas si quieres) */
-.l1 { top: 60px; left: 120px; }
-.l2 { top: 80px; right: 100px; }
-.l3 { top: 120px; left: 60px; }
-.l4 { top: 140px; right: 60px; }
-.l5 { top: 100px; left: 180px; }
-
+/* efecto hover */
 .link:hover {
-  background: rgba(255, 0, 100, 0.2);
+  background: rgba(255, 0, 100, 0.25);
+  transform: scale(1.1);
 }
+
+/* POSICIONES (ajústalas si hace falta) */
+.l1 { top: 60px; left: 140px; }
+.l2 { top: 80px; right: 120px; }
+.l3 { top: 120px; left: 70px; }
+.l4 { top: 140px; right: 70px; }
+.l5 { top: 110px; left: 200px; }
+.l6 { top: 160px; left: 150px; }
 
 </style>
 </head>
@@ -52,15 +57,16 @@ body {
 
 <div class="bouquet">
 
-  <!-- IMAGEN DEL RAMO -->
-  <img src="https://i.imgur.com/0Z8FQyR.jpg" alt="ramo de rosas">
+  <!-- TU IMAGEN -->
+  <img src="ramo.jpeg" alt="ramo de rosas">
 
-  <!-- LINKS SOBRE LAS ROSAS -->
-  <a href="https://open.spotify.com" class="link l1" target="_blank"></a>
-  <a href="https://youtube.com" class="link l2" target="_blank"></a>
-  <a href="https://drive.google.com" class="link l3" target="_blank"></a>
-  <a href="https://instagram.com" class="link l4" target="_blank"></a>
-  <a href="https://example.com" class="link l5" target="_blank"></a>
+  <!-- LINKS SOBRE LAS FLORES -->
+  <a href="https://open.spotify.com" target="_blank" class="link l1"></a>
+  <a href="https://youtube.com" target="_blank" class="link l2"></a>
+  <a href="https://drive.google.com" target="_blank" class="link l3"></a>
+  <a href="https://instagram.com" target="_blank" class="link l4"></a>
+  <a href="https://example.com" target="_blank" class="link l5"></a>
+  <a href="https://example.com" target="_blank" class="link l6"></a>
 
 </div>
 
