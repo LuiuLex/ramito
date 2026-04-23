@@ -12,83 +12,40 @@ body{
   font-family:Arial;
 }
 
-/* BOTÓN GIRASOL */
+/* BOTÓN */
 #sunflower{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:130px;
+  width:120px;
   cursor:pointer;
   transition:0.5s;
 }
 
-/* SEMILLA */
-.seed{
+/* CANVAS */
+canvas{
   position:absolute;
-  width:12px;
-  height:12px;
-  background:#5c3d2e;
-  border-radius:50%;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  animation:fall 1s forwards;
-}
-
-@keyframes fall{
-  to{
-    top:80%;
-  }
-}
-
-/* ÁRBOL */
-#tree{
-  position:absolute;
-  bottom:0;
-  left:50%;
-  width:6px;
-  height:0;
-  background:#2e7d32;
-  transform:translateX(-50%);
-  transition:height 2s;
-}
-
-/* RAMAS */
-.branch{
-  position:absolute;
-  width:4px;
-  height:80px;
-  background:#2e7d32;
-  transform-origin:bottom;
-}
-
-/* FLORES */
-.flower{
-  position:absolute;
-  width:35px;
-  height:35px;
-  background:url('https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png') center/contain no-repeat;
+  top:0;
+  left:0;
 }
 
 /* TEXTO */
-#text{
+#text, #clock{
   position:absolute;
   left:10%;
-  top:40%;
-  font-size:28px;
   opacity:0;
-  transition:1.5s;
+  transition:2s;
 }
 
-/* RELOJ */
+#text{
+  top:40%;
+  font-size:28px;
+}
+
 #clock{
-  position:absolute;
-  left:10%;
   top:50%;
   font-size:22px;
-  opacity:0;
-  transition:1.5s;
 }
 </style>
 </head>
@@ -97,99 +54,150 @@ body{
 
 <img id="sunflower" src="https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png">
 
-<div id="tree"></div>
+<canvas id="c"></canvas>
+
 <div id="text">Para ti 💛</div>
 <div id="clock"></div>
 
 <script>
-const sunflower = document.getElementById("sunflower");
-const tree = document.getElementById("tree");
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
 
-sunflower.addEventListener("click", startAnimation);
+canvas.width = innerWidth;
+canvas.height = innerHeight;
 
-function startAnimation(){
+let branches = [];
+let flowers = [];
+let started = false;
 
-  sunflower.style.opacity = "0";
+/* CLICK */
+document.getElementById("sunflower").onclick = () => {
+  if(started) return;
+  started = true;
 
-  // SEMILLA
-  let seed = document.createElement("div");
-  seed.className = "seed";
-  document.body.appendChild(seed);
+  document.getElementById("sunflower").style.opacity = 0;
 
-  setTimeout(()=>{
-    seed.remove();
+  dropSeed();
+};
 
-    // CRECER TRONCO
-    tree.style.height = "250px";
+/* SEMILLA */
+function dropSeed(){
+  let y = innerHeight/2;
 
-    setTimeout(()=>{
-      createBranches();
-      createHeart();
+  let interval = setInterval(()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-      setTimeout(()=>{
-        moveTree();
-        showText();
-      },2000);
+    ctx.beginPath();
+    ctx.arc(innerWidth/2,y,6,0,Math.PI*2);
+    ctx.fillStyle="brown";
+    ctx.fill();
 
-    },2000);
+    y+=5;
 
-  },1000);
+    if(y >= innerHeight-20){
+      clearInterval(interval);
+      growTree();
+    }
+
+  },16);
 }
 
-/* RAMAS */
-function createBranches(){
-  for(let i=0;i<5;i++){
-    let branch = document.createElement("div");
-    branch.className = "branch";
+/* ÁRBOL */
+function growTree(){
+  branches.push({
+    x:innerWidth/2,
+    y:innerHeight,
+    len:0,
+    angle:-Math.PI/2,
+    depth:0
+  });
 
-    branch.style.bottom = (100 + i*30) + "px";
-    branch.style.left = "50%";
-    branch.style.transform = `rotate(${i%2==0 ? -30 : 30}deg)`;
+  let interval = setInterval(()=>{
+    ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    document.body.appendChild(branch);
-  }
+    branches.forEach(b=>{
+      let nx = b.x + Math.cos(b.angle)*b.len;
+      let ny = b.y + Math.sin(b.angle)*b.len;
+
+      ctx.beginPath();
+      ctx.moveTo(b.x,b.y);
+      ctx.lineTo(nx,ny);
+      ctx.strokeStyle="#2e7d32";
+      ctx.lineWidth=2;
+      ctx.stroke();
+
+      b.len += 1.5;
+
+      if(b.len > 50 && b.depth < 4 && Math.random()<0.02){
+        branches.push({
+          x:nx,
+          y:ny,
+          len:0,
+          angle:b.angle + (Math.random()*0.8-0.4),
+          depth:b.depth+1
+        });
+      }
+    });
+
+    if(branches.length > 120){
+      clearInterval(interval);
+      growHeart();
+    }
+
+  },16);
 }
 
 /* CORAZÓN */
-function createHeart(){
-  const centerX = window.innerWidth/2;
-  const centerY = window.innerHeight/2;
+function growHeart(){
+  let t = 0;
 
-  for(let t=0;t<Math.PI*2;t+=0.2){
+  let img = new Image();
+  img.src = "https://pngimg.com/uploads/sunflower/sunflower_PNG13406.png";
+
+  let interval = setInterval(()=>{
+    t += 0.1;
+
     let x = 16*Math.pow(Math.sin(t),3);
     let y = -(13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t));
 
-    let flower = document.createElement("div");
-    flower.className = "flower";
+    let px = innerWidth/2 + x*12;
+    let py = innerHeight/2 + y*12;
 
-    flower.style.left = (centerX + x*10) + "px";
-    flower.style.top = (centerY + y*10) + "px";
+    ctx.drawImage(img,px-15,py-15,30,30);
 
-    document.body.appendChild(flower);
-  }
+    if(t >= Math.PI*2){
+      clearInterval(interval);
+      moveScene();
+    }
+
+  },30);
 }
 
 /* MOVER */
-function moveTree(){
-  tree.style.left = "70%";
+function moveScene(){
+  let offset = 0;
 
-  let branches = document.querySelectorAll(".branch");
-  branches.forEach(b=>{
-    b.style.left = "70%";
-  });
+  let interval = setInterval(()=>{
+    offset += 3;
+    canvas.style.transform = `translateX(${offset}px)`;
+
+    if(offset > 250){
+      clearInterval(interval);
+      showText();
+    }
+
+  },16);
 }
 
-/* TEXTO + RELOJ */
+/* TEXTO */
 function showText(){
-  const text = document.getElementById("text");
-  const clock = document.getElementById("clock");
-
-  text.style.opacity = "1";
-  clock.style.opacity = "1";
+  document.getElementById("text").style.opacity = 1;
+  document.getElementById("clock").style.opacity = 1;
 
   setInterval(()=>{
     let now = new Date();
-    clock.innerText = now.toLocaleTimeString();
+    document.getElementById("clock").innerText =
+      now.toLocaleTimeString();
   },1000);
 }
 </script>
